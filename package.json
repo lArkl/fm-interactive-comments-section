@@ -4,7 +4,7 @@
   "description": "Interactive comments section",
   "main": "index.js",
   "scripts": {
-    "format": "prettier \"{src}/**/*.{js,html}\" --write",
+    "format": "prettier \"./src/**/*.{js,html}\" --write",
     "start": "parcel index.html --open",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "parcel build index.html"
