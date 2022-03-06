@@ -84,6 +84,11 @@ button {
   width: 20rem;
 }
 
+.replying {
+  color: var(--moderate-blue);
+  font-weight: 500;
+}
+
 .replies {
   margin-left: 1rem;
   position: relative;

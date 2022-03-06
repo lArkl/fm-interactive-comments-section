@@ -5,8 +5,8 @@ import Actions from "./Actions";
 import CommentContent from "./CommentContent";
 import Modal from "./Modal";
 
-function Comment({ comment, currentUsername }) {
-  const { createdAt, user, score, replies } = comment;
+function Comment({ comment, currentUsername, updateComment, deleteComment }) {
+  const { createdAt, user, score, id, replyingTo } = comment;
   const [showDeleteModal, updateShowDeleteModal] = useState(false);
   const [content, updateContent] = useState(comment.content);
   const [isEditing, updateIsEditing] = useState(false);
@@ -22,6 +22,7 @@ function Comment({ comment, currentUsername }) {
           isUser={isUser}
         />
         <CommentContent isEditing={isEditing} updateContent={updateContent}>
+          {replyingTo && <span className="replying">@{replyingTo}</span>}{" "}
           {content}
         </CommentContent>
 
@@ -40,7 +41,10 @@ function Comment({ comment, currentUsername }) {
           <div className="action__update">
             <button
               className="other-button"
-              onClick={() => updateIsEditing(false)}
+              onClick={() => {
+                updateComment(content);
+                updateIsEditing(false);
+              }}
             >
               UPDATE
             </button>
@@ -50,20 +54,12 @@ function Comment({ comment, currentUsername }) {
       {showDeleteModal ? (
         <Modal
           closeDeleteModal={() => updateShowDeleteModal(false)}
-          onDeleteComment={() => {}}
+          onDeleteComment={() => {
+            deleteComment(id);
+            updateShowDeleteModal(false);
+          }}
         />
       ) : null}
-      {replies && (
-        <div className="replies">
-          {replies.map((reply) => (
-            <Comment
-              comment={reply}
-              key={reply.id}
-              currentUsername={currentUsername}
-            />
-          ))}
-        </div>
-      )}
     </>
   );
 }
