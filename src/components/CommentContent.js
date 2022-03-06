@@ -5,11 +5,9 @@ function CommentContent({ isEditing, updateContent, children }) {
     <div className="comment-content">
       {isEditing ? (
         <textarea
-          value={children}
+          defaultValue={children}
           onChange={(e) => updateContent(e.target.value)}
-        >
-          {children}
-        </textarea>
+        ></textarea>
       ) : (
         <p>{children}</p>
       )}
