@@ -1,5 +1,6 @@
 import React from "react";
-import images from "../../images/avatars/*.webp";
+import "./styles.css"
+import images from "../../../images/avatars/*.webp";
 
 function Header({ username, imgName, createdAt, isUser }) {
   return (

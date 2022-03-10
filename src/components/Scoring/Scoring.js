@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import PlusImg from "../../images/icon-plus.svg";
-import MinusImg from "../../images/icon-minus.svg";
+import PlusImg from "../../../images/icon-plus.svg";
+import MinusImg from "../../../images/icon-minus.svg";
+import "./styles.css";
 
 function Scoring(props) {
   const [score, updateScore] = useState(props.score);

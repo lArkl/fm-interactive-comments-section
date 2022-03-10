@@ -1,0 +1,13 @@
+.comment-content {
+  color: var(--grayish-blue)
+}
+
+.comment-content > textarea {
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  height: 6rem;
+  margin: 1rem 0;
+  resize: none;
+  width: 100%;
+}

@@ -1,7 +1,8 @@
 import React from "react";
-import ReplyIcon from "../../images/icon-reply.svg";
-import EditIcon from "../../images/icon-edit.svg";
-import DeleteIcon from "../../images/icon-delete.svg";
+import ReplyIcon from "../../../images/icon-reply.svg";
+import EditIcon from "../../../images/icon-edit.svg";
+import DeleteIcon from "../../../images/icon-delete.svg";
+import "./styles.css";
 
 function Actions({ isUser, turnEdition, isEditing, openDeleteModal }) {
   return isUser ? (

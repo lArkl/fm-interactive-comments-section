@@ -1,0 +1,19 @@
+.scoring {
+  align-items: center;
+  background: var(--very-lightgray);
+  border-radius: 0.5rem;
+  color: var(--moderate-blue);
+  display: flex;
+  font-weight: 500;
+  height: 2rem;
+  justify-content: space-between;
+  width: 6rem;
+}
+
+.scoring > button {
+  margin: auto;
+}
+
+.scoring > button:last-child {
+  margin-bottom: 0.6rem;
+}

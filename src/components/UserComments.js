@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Comment from "./Comment";
+import AddComment from "./AdditionalComment/AdditionalComment";
 
 function UserComments(props) {
   const [currentUser, setCurrentUser] = useState({});
@@ -25,16 +26,16 @@ function UserComments(props) {
     setComments(auxComments);
   };
 
-  const updateComment = (content, commentId, replyId) => {
+  const updateComment = (fieldObject, commentId, replyId) => {
     const auxComments = [...comments];
-    const comment = auxComments.find((c) => c.id === commentId);
+    let comment = auxComments.find((c) => c.id === commentId);
     if (replyId) {
-      const reply = comment.replies.find((r) => r.id === replyId);
-      reply.content = content;
-    } else {
-      comment.content = content;
+      comment = comment.replies.find((r) => r.id === replyId);
     }
-    console.log(auxComments);
+    Object.entries(fieldObject).forEach(([field, value]) => {
+      comment[field] = value;
+    });
+    console.log(comment);
     setComments(auxComments);
   };
 
@@ -55,8 +56,8 @@ function UserComments(props) {
                   comment={reply}
                   key={reply.id}
                   deleteComment={() => deleteComment(comment.id, reply.id)}
-                  updateComment={(content) =>
-                    updateComment(content, comment.id, reply.id)
+                  updateComment={(fieldObject) =>
+                    updateComment(fieldObject, comment.id, reply.id)
                   }
                   currentUsername={currentUser.username}
                 />
@@ -65,6 +66,8 @@ function UserComments(props) {
           ) : null}
         </div>
       ))}
+      <AddComment />
+
     </section>
   );
 }

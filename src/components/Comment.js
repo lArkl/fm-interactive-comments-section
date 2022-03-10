@@ -1,14 +1,16 @@
 import React, { useState, useRef } from "react";
-import Scoring from "./Scoring";
-import Header from "./Header";
-import Actions from "./Actions";
-import CommentContent from "./CommentContent";
-import Modal from "./Modal";
+import Scoring from "./Scoring/Scoring";
+import Header from "./Header/Header";
+import Actions from "./Actions/Actions";
+import CommentContent from "./CommentContent/CommentContent";
+import Modal from "./Modal/Modal";
 
 function Comment({ comment, currentUsername, updateComment, deleteComment }) {
   const { createdAt, user, score, id, replyingTo } = comment;
   const [showDeleteModal, updateShowDeleteModal] = useState(false);
-  const [content, updateContent] = useState(comment.content);
+  const contentHook = useState(comment.content);
+  const [content] = contentHook;
+  const contentRef = useRef(null);
   const [isEditing, updateIsEditing] = useState(false);
   const imgName = user.image.webp.match(/[-a-z]+(?=.webp$)/);
   const isUser = user.username === currentUsername;
@@ -21,17 +23,19 @@ function Comment({ comment, currentUsername, updateComment, deleteComment }) {
           createdAt={createdAt}
           isUser={isUser}
         />
-        <CommentContent isEditing={isEditing} updateContent={updateContent}>
-          {replyingTo && <span className="replying">@{replyingTo}</span>}{" "}
-          {content}
-        </CommentContent>
-
+        <CommentContent
+          isEditing={isEditing}
+          contentHook={contentHook}
+          replyingTo={replyingTo}
+          ref={contentRef}
+        />
         <div className="options">
           <Scoring score={score} />
           <Actions
             isUser={isUser}
             turnEdition={() => {
               updateIsEditing(true);
+              contentRef.current.focus();
             }}
             openDeleteModal={() => updateShowDeleteModal(true)}
             isEditing={isEditing}
@@ -42,7 +46,7 @@ function Comment({ comment, currentUsername, updateComment, deleteComment }) {
             <button
               className="other-button"
               onClick={() => {
-                updateComment(content);
+                updateComment({ content });
                 updateIsEditing(false);
               }}
             >
