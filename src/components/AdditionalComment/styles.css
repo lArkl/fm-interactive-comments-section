@@ -1,0 +1,23 @@
+.additional {
+  background: var(--white);
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 0.5rem;
+}
+
+.additional > textarea {
+  height: 5rem;
+  width: min(19.5rem, 100%);
+  resize: none;
+  margin-bottom: 1rem;
+}
+
+.additional__bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.additional__bar > img {
+  height: 2rem;
+}

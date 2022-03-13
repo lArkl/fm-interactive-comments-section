@@ -1,5 +1,5 @@
 import React from "react";
-import UserComments from "./components/UserComments";
+import UserComments from "./components/UserComments/UserComments";
 
 function App() {
   return (

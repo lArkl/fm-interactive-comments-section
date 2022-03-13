@@ -33,6 +33,10 @@ button {
   font-weight: 700;
 }
 
+button:hover {
+  cursor: pointer;
+}
+
 .comment {
   background: var(--white);
   border-radius: 0.5rem;
