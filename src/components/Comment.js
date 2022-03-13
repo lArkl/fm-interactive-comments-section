@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import Scoring from "./Scoring/Scoring";
 import Header from "./Header/Header";
 import Actions from "./Actions/Actions";
-import CommentContent from "./CommentContent/CommentContent";
+import CommentContent, { replaceReply } from "./CommentContent/CommentContent";
 import Modal from "./Modal/Modal";
 
 function Comment({
@@ -50,7 +50,7 @@ function Comment({
             <button
               className="other-button"
               onClick={() => {
-                updateComment({ content });
+                updateComment({ content: replaceReply(content) });
                 updateIsEditing(false);
               }}
             >

@@ -3,25 +3,17 @@ import "./styles.css";
 
 function CommentContent({ isEditing, replyingTo, contentHook }, ref) {
   const [content, updateContent] = contentHook;
-  const formatedContent = formatContent(content, replyingTo, isEditing);
   return (
     <div className="comment-content">
       {isEditing ? (
         <textarea
-          onChange={(ev) => {
-            const replacedContent = formatContent(
-              ev.target.value,
-              replyingTo,
-              false
-            );
-            updateContent(replacedContent);
-          }}
-          defaultValue={formatedContent}
+          onChange={(ev) => updateContent(ev.target.value)}
+          defaultValue={`@${replyingTo} ${replaceReply(content)}`}
         ></textarea>
       ) : (
         <p>
           {replyingTo && <span className="replying">@{replyingTo} </span>}
-          {formatedContent}
+          {replaceReply(content)}
         </p>
       )}
     </div>
@@ -30,9 +22,6 @@ function CommentContent({ isEditing, replyingTo, contentHook }, ref) {
 
 export default CommentContent;
 
-function formatContent(content, replyingTo, isEditing) {
-  if (isEditing) {
-    return `@${replyingTo} ${content}`;
-  }
+export function replaceReply(content) {
   return content.replace(/@\w+/, "").trim();
 }
