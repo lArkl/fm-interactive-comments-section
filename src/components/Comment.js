@@ -5,12 +5,17 @@ import Actions from "./Actions/Actions";
 import CommentContent from "./CommentContent/CommentContent";
 import Modal from "./Modal/Modal";
 
-function Comment({ comment, currentUsername, updateComment, deleteComment }) {
+function Comment({
+  comment,
+  currentUsername,
+  updateComment,
+  deleteComment,
+  onReply,
+}) {
   const { createdAt, user, score, id, replyingTo } = comment;
   const [showDeleteModal, updateShowDeleteModal] = useState(false);
   const contentHook = useState(comment.content);
   const [content] = contentHook;
-  const contentRef = useRef(null);
   const [isEditing, updateIsEditing] = useState(false);
   const imgName = user.image.webp.match(/[-a-z]+(?=.webp$)/);
   const isUser = user.username === currentUsername;
@@ -27,7 +32,6 @@ function Comment({ comment, currentUsername, updateComment, deleteComment }) {
           isEditing={isEditing}
           contentHook={contentHook}
           replyingTo={replyingTo}
-          ref={contentRef}
         />
         <div className="options">
           <Scoring score={score} />
@@ -35,10 +39,10 @@ function Comment({ comment, currentUsername, updateComment, deleteComment }) {
             isUser={isUser}
             turnEdition={() => {
               updateIsEditing(true);
-              contentRef.current.focus();
             }}
             openDeleteModal={() => updateShowDeleteModal(true)}
             isEditing={isEditing}
+            onReply={() => onReply(user.username, id)}
           />
         </div>
         {isEditing ? (
