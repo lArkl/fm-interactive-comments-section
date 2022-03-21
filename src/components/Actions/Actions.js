@@ -4,8 +4,8 @@ import EditIcon from "../../../images/icon-edit.svg";
 import DeleteIcon from "../../../images/icon-delete.svg";
 import "./styles.css";
 
-function Actions({ isUser, turnEdition, isEditing, openDeleteModal, onReply }) {
-  return isUser ? (
+export function UserActions({ turnEdition, isEditing, openDeleteModal }) {
+  return (
     <div className="actions">
       <button
         className="actions__delete"
@@ -24,7 +24,11 @@ function Actions({ isUser, turnEdition, isEditing, openDeleteModal, onReply }) {
         Edit
       </button>
     </div>
-  ) : (
+  );
+}
+
+export function ReplyAction({ onReply }) {
+  return (
     <div className="actions">
       <button className="actions__reply" onClick={onReply}>
         <img src={ReplyIcon} alt="reply" />
@@ -33,5 +37,3 @@ function Actions({ isUser, turnEdition, isEditing, openDeleteModal, onReply }) {
     </div>
   );
 }
-
-export default Actions;
