@@ -10,7 +10,7 @@ function AdditionalComment({ replyTo, user, onAddComment }) {
       <textarea
         onChange={(e) => setContent(e.target.value)}
         placeholder="Add comment..."
-        defaultValue={replyTo && `@${replyTo}`}
+        value={content}
       ></textarea>
       <div className="additional__bar">
         <img src={images[imgName]} alt={user.username} />

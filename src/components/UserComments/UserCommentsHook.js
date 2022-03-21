@@ -17,13 +17,15 @@ function UseCommentsData() {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem(
-      DATA_KEY,
-      JSON.stringify({
-        comments,
-        currentUser,
-      })
-    );
+    if (USE_LOCAL_STORAGE) {
+      localStorage.setItem(
+        DATA_KEY,
+        JSON.stringify({
+          comments,
+          currentUser,
+        })
+      );
+    }
   }, [comments]);
 
   function deleteComment(commentId, replyId) {
@@ -33,9 +35,9 @@ function UseCommentsData() {
       const replyIdx = auxComments[commentIdx].replies.findIndex(
         (r) => r.id === replyId
       );
-      delete auxComments[commentIdx].replies[replyIdx];
+      auxComments[commentIdx].replies.splice(replyIdx, 1);
     } else {
-      delete auxComments[commentIdx];
+      auxComments.splice(commentIdx, 1);
     }
     setComments(auxComments);
   }
@@ -52,7 +54,7 @@ function UseCommentsData() {
     setComments(auxComments);
   }
 
-  function addComment(content, commentId = -1) {
+  function addComment(content, commentId = -1, replyingTo = "") {
     const newComment = {
       id: Math.floor(Math.random() * 100) + 10,
       content,
@@ -63,7 +65,7 @@ function UseCommentsData() {
     const newComments = [...comments];
     if (commentId > -1) {
       const comment = newComments.find((c) => c.id === commentId);
-      newComment.replyingTo = comment.user.username;
+      newComment.replyingTo = replyingTo ?? comment.user.username;
       comment.replies.push(newComment);
     } else {
       newComment.replies = [];

@@ -6,10 +6,12 @@
 }
 
 .additional > textarea {
+  box-sizing: border-box;
   height: 5rem;
-  width: min(19.5rem, 100%);
-  resize: none;
   margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  resize: none;
+  width: min(19.5rem, 100%);
 }
 
 .additional__bar {

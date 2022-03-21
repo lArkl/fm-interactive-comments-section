@@ -1,24 +1,27 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import Scoring from "./Scoring/Scoring";
 import Header from "./Header/Header";
-import Actions from "./Actions/Actions";
+import { UserActions, ReplyAction } from "./Actions/Actions";
+import AdditionalComment from "./AdditionalComment/AdditionalComment";
 import CommentContent, { replaceReply } from "./CommentContent/CommentContent";
 import Modal from "./Modal/Modal";
 
 function Comment({
+  addComment,
   comment,
-  currentUsername,
+  currentUser,
   updateComment,
   deleteComment,
-  onReply,
 }) {
   const { createdAt, user, score, id, replyingTo } = comment;
   const [showDeleteModal, updateShowDeleteModal] = useState(false);
   const contentHook = useState(comment.content);
   const [content] = contentHook;
   const [isEditing, updateIsEditing] = useState(false);
+  const [showAddComment, updateShowAddComment] = useState(false);
+
   const imgName = user.image.webp.match(/[-a-z]+(?=.webp$)/);
-  const isUser = user.username === currentUsername;
+  const isUser = user.username === currentUser.username;
   return (
     <>
       <article className="comment">
@@ -35,15 +38,17 @@ function Comment({
         />
         <div className="options">
           <Scoring score={score} />
-          <Actions
-            isUser={isUser}
-            turnEdition={() => {
-              updateIsEditing(true);
-            }}
-            openDeleteModal={() => updateShowDeleteModal(true)}
-            isEditing={isEditing}
-            onReply={() => onReply(user.username, id)}
-          />
+          {isUser ? (
+            <UserActions
+              turnEdition={() => {
+                updateIsEditing(true);
+              }}
+              openDeleteModal={() => updateShowDeleteModal(true)}
+              isEditing={isEditing}
+            />
+          ) : (
+            <ReplyAction onReply={() => updateShowAddComment(true)} />
+          )}
         </div>
         {isEditing ? (
           <div className="action__update">
@@ -59,6 +64,16 @@ function Comment({
           </div>
         ) : null}
       </article>
+      {showAddComment && (
+        <AdditionalComment
+          user={currentUser}
+          replyTo={true}
+          onAddComment={(content) => {
+            addComment(content);
+            updateShowAddComment(false);
+          }}
+        />
+      )}
       {showDeleteModal ? (
         <Modal
           closeDeleteModal={() => updateShowDeleteModal(false)}
