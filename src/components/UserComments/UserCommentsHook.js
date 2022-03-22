@@ -1,19 +1,35 @@
 import { useEffect, useState } from "react";
 
 const DATA_KEY = "data";
+const ID_KEY = "maxId";
 const USE_LOCAL_STORAGE = false;
+
+function calcMaxId(data) {
+  const ids = data.comments
+    .map((e) => e.replies.map((r) => r.id).concat([e.id]))
+    .flat();
+  return Math.max(...ids);
+}
 
 function UseCommentsData() {
   const [currentUser, setCurrentUser] = useState(null);
   const [comments, setComments] = useState([]);
+  const [currentId, updateCurrentId] = useState(-1);
 
   useEffect(() => {
     const localData = USE_LOCAL_STORAGE && localStorage.getItem(DATA_KEY);
-    const data = localData
-      ? JSON.parse(localData)
-      : require("../../../data.json");
+    let data = {};
+    let maxId = 0;
+    if (localData) {
+      data = JSON.parse(localData);
+      maxId = parseInt(localStorage.getItem(ID_KEY));
+    } else {
+      data = require("../../../data.json");
+      maxId = calcMaxId(data);
+    }
     setComments(data.comments);
     setCurrentUser(data.currentUser);
+    updateCurrentId(maxId);
   }, []);
 
   useEffect(() => {
@@ -54,11 +70,12 @@ function UseCommentsData() {
     setComments(auxComments);
   }
 
-  function addComment(content, commentId = -1, replyingTo = "") {
+  function addComment(content, commentId = -1, replyingTo = false) {
+    const newCurrentId = currentId + 1;
     const newComment = {
-      id: Math.floor(Math.random() * 100) + 10,
+      id: newCurrentId,
       content,
-      createdAt: new Date().toLocaleString(),
+      localDate: Date.now(),
       score: 0,
       user: currentUser,
     };
@@ -72,6 +89,10 @@ function UseCommentsData() {
       newComments.push(newComment);
     }
     setComments(newComments);
+    updateCurrentId(newCurrentId);
+    if (USE_LOCAL_STORAGE) {
+      localStorage.setItem(ID_KEY, newCurrentId);
+    }
   }
 
   return [currentUser, comments, updateComment, deleteComment, addComment];

@@ -13,7 +13,7 @@ function Comment({
   updateComment,
   deleteComment,
 }) {
-  const { createdAt, user, score, id, replyingTo } = comment;
+  const { createdAt, user, score, id, replyingTo, localDate } = comment;
   const [showDeleteModal, updateShowDeleteModal] = useState(false);
   const contentHook = useState(comment.content);
   const [content] = contentHook;
@@ -29,6 +29,7 @@ function Comment({
           username={user.username}
           imgName={imgName}
           createdAt={createdAt}
+          localDate={localDate}
           isUser={isUser}
         />
         <CommentContent
