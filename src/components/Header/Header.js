@@ -2,16 +2,19 @@ import React from "react";
 import "./styles.css";
 import images from "../../../images/avatars/*.webp";
 
-function Header({ username, imgName, createdAt, localDate, isUser }) {
+function Header({ username, imgName, createdAt, localDate, isUser, children }) {
   const date = localDate ? formatDate(localDate) : createdAt;
   return (
     <div className="header">
-      <div className="header__image">
-        <img src={images[imgName]} alt="user" />
+      <div className="header__data">
+        <div className="header__image">
+          <img src={images[imgName]} alt="user" />
+        </div>
+        <div className="header__user">{username}</div>
+        {isUser && <div className="header__you">you</div>}
+        <div className="header__date">{date}</div>
       </div>
-      <div className="header__user">{username}</div>
-      {isUser && <div className="header__you">you</div>}
-      <div className="header__date">{date}</div>
+      <div className="header__action">{children}</div>
     </div>
   );
 }
