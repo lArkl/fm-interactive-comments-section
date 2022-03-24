@@ -13,7 +13,8 @@ function Comment({
   updateComment,
   deleteComment,
 }) {
-  const { createdAt, user, score, id, replyingTo, localDate } = comment;
+  const { createdAt, user, score, scoreStatus, id, replyingTo, localDate } =
+    comment;
   const [showDeleteModal, updateShowDeleteModal] = useState(false);
   const contentHook = useState(comment.content);
   const [content] = contentHook;
@@ -38,7 +39,12 @@ function Comment({
           replyingTo={replyingTo}
         />
         <div className="options">
-          <Scoring score={score} />
+          <Scoring
+            scoreInfo={{ score, scoreStatus }}
+            updateScore={(score, scoreStatus) =>
+              updateComment({ score, scoreStatus })
+            }
+          />
           {isUser ? (
             <UserActions
               turnEdition={() => {

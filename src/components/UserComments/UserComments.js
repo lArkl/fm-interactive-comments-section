@@ -15,7 +15,9 @@ function UserComments() {
             comment={comment}
             currentUser={currentUser}
             deleteComment={() => deleteComment(comment.id)}
-            updateComment={() => updateComment(comment.id)}
+            updateComment={(fieldObject) =>
+              updateComment(fieldObject, comment.id)
+            }
             addComment={(content) =>
               addComment(content, comment.id, comment.user.username)
             }

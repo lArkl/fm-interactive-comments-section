@@ -1,24 +1,52 @@
-import React, { useState } from "react";
-import PlusImg from "../../../images/icon-plus.svg";
-import MinusImg from "../../../images/icon-minus.svg";
+import React from "react";
 import "./styles.css";
 
-function Scoring(props) {
-  const [score, updateScore] = useState(props.score);
+function Scoring({ scoreInfo, updateScore }) {
+  const { score, scoreStatus } = scoreInfo;
   return (
     <div className="scoring">
-      <button onClick={() => updateScore((score) => score + 1)}>
-        <img src={PlusImg} alt="plus" />
-      </button>
+      <button
+        isPressed={(scoreStatus === SCORE_STATUS.PLUS).toString()}
+        onClick={() => {
+          const delta =
+            scoreStatus === SCORE_STATUS.MINUS
+              ? 2
+              : scoreStatus === SCORE_STATUS.PLUS
+              ? -1
+              : 1;
+          const newStatus =
+            scoreStatus === SCORE_STATUS.PLUS
+              ? SCORE_STATUS.NONE
+              : SCORE_STATUS.PLUS;
+          updateScore(score + delta, newStatus);
+        }}
+      ></button>
       <div>{score}</div>
       <button
-        onClick={() => updateScore((score) => score - 1)}
-        disabled={score < 1}
-      >
-        <img src={MinusImg} alt="minus" />
-      </button>
+        isPressed={(scoreStatus === SCORE_STATUS.MINUS).toString()}
+        disabled={score < 1 && scoreStatus !== SCORE_STATUS.MINUS}
+        onClick={() => {
+          const delta =
+            scoreStatus === SCORE_STATUS.MINUS
+              ? 1
+              : scoreStatus === SCORE_STATUS.PLUS
+              ? -2
+              : -1;
+          const newStatus =
+            scoreStatus === SCORE_STATUS.MINUS
+              ? SCORE_STATUS.NONE
+              : SCORE_STATUS.MINUS;
+          updateScore(score + delta, newStatus);
+        }}
+      ></button>
     </div>
   );
 }
 
 export default Scoring;
+
+const SCORE_STATUS = {
+  PLUS: 1,
+  NONE: 0,
+  MINUS: -1,
+};
