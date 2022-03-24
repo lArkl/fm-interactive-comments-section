@@ -17,7 +17,7 @@
   height: 1.1rem;
 }
 
-.scoring > button[isPressed="true"] {
+.scoring > button[ispressed="true"] {
   filter: brightness(0.5) hue-rotate(25deg);
 }
 

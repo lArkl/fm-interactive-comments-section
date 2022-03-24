@@ -6,36 +6,18 @@ function Scoring({ scoreInfo, updateScore }) {
   return (
     <div className="scoring">
       <button
-        isPressed={(scoreStatus === SCORE_STATUS.PLUS).toString()}
+        ispressed={(scoreStatus === SCORE_STATUS.PLUS).toString()}
         onClick={() => {
-          const delta =
-            scoreStatus === SCORE_STATUS.MINUS
-              ? 2
-              : scoreStatus === SCORE_STATUS.PLUS
-              ? -1
-              : 1;
-          const newStatus =
-            scoreStatus === SCORE_STATUS.PLUS
-              ? SCORE_STATUS.NONE
-              : SCORE_STATUS.PLUS;
+          const [delta, newStatus] = getPlusScore(scoreStatus);
           updateScore(score + delta, newStatus);
         }}
       ></button>
       <div>{score}</div>
       <button
-        isPressed={(scoreStatus === SCORE_STATUS.MINUS).toString()}
+        ispressed={(scoreStatus === SCORE_STATUS.MINUS).toString()}
         disabled={score < 1 && scoreStatus !== SCORE_STATUS.MINUS}
         onClick={() => {
-          const delta =
-            scoreStatus === SCORE_STATUS.MINUS
-              ? 1
-              : scoreStatus === SCORE_STATUS.PLUS
-              ? -2
-              : -1;
-          const newStatus =
-            scoreStatus === SCORE_STATUS.MINUS
-              ? SCORE_STATUS.NONE
-              : SCORE_STATUS.MINUS;
+          const [delta, newStatus] = getMinusScore(scoreStatus);
           updateScore(score + delta, newStatus);
         }}
       ></button>
@@ -50,3 +32,23 @@ const SCORE_STATUS = {
   NONE: 0,
   MINUS: -1,
 };
+
+function getPlusScore(scoreStatus) {
+  if (scoreStatus === SCORE_STATUS.PLUS) {
+    return [-1, SCORE_STATUS.NONE];
+  }
+  if (scoreStatus === SCORE_STATUS.MINUS) {
+    return [2, SCORE_STATUS.PLUS];
+  }
+  return [1, SCORE_STATUS.PLUS];
+}
+
+function getMinusScore(scoreStatus) {
+  if (scoreStatus === SCORE_STATUS.MINUS) {
+    return [1, SCORE_STATUS.NONE];
+  }
+  if (scoreStatus === SCORE_STATUS.PLUS) {
+    return [-2, SCORE_STATUS.MINUS];
+  }
+  return [-1, SCORE_STATUS.MINUS];
+}
