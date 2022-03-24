@@ -80,6 +80,11 @@ button:hover {
   padding: 0.6rem 0.8rem;
 }
 
+.other-button:disabled {
+  cursor: initial;
+  background-color: var(--light-grayblue);
+}
+
 .attribution { 
   font-size: 11px; 
   text-align: center; 

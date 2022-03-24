@@ -16,6 +16,7 @@ function AdditionalComment({ replyTo, user, onAddComment }) {
         <img src={images[imgName]} alt={user.username} />
         <button
           className="other-button"
+          disabled={!content}
           onClick={() => {
             onAddComment(content);
             setContent("");

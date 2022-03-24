@@ -20,9 +20,9 @@ export default Header;
 
 const rtf1 = new Intl.RelativeTimeFormat("en", { style: "narrow" });
 const dateUnits = [
-  { ratio: 60, unit: "seconds"},
-  { ratio: 60, unit: "minute"},
-  { ratio: 24, unit: "hour"},
+  { ratio: 60, unit: "seconds" },
+  { ratio: 60, unit: "minute" },
+  { ratio: 24, unit: "hour" },
   { ratio: 30, unit: "day" },
   { ratio: 12, unit: "month" },
 ];
