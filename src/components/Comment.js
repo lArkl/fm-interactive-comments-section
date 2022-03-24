@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Scoring from "./Scoring/Scoring";
 import Header from "./Header/Header";
-import { UserActions, ReplyAction } from "./Actions/Actions";
+import Actions from "./Actions/Actions";
 import AdditionalComment from "./AdditionalComment/AdditionalComment";
 import CommentContent, { replaceReply } from "./CommentContent/CommentContent";
 import Modal from "./Modal/Modal";
@@ -23,53 +23,64 @@ function Comment({
 
   const imgName = user.image.webp.match(/[-a-z]+(?=.webp$)/);
   const isUser = user.username === currentUser.username;
+
+  const actions = (
+    <Actions
+      isUser={isUser}
+      turnEdition={() => {
+        updateIsEditing(true);
+      }}
+      openDeleteModal={() => updateShowDeleteModal(true)}
+      isEditing={isEditing}
+      onReply={() => updateShowAddComment(true)}
+    />
+  );
+
+  const scoring = (
+    <Scoring
+      scoreInfo={{ score, scoreStatus }}
+      updateScore={(score, scoreStatus) =>
+        updateComment({ score, scoreStatus })
+      }
+    />
+  );
   return (
     <>
       <article className="comment">
-        <Header
-          username={user.username}
-          imgName={imgName}
-          createdAt={createdAt}
-          localDate={localDate}
-          isUser={isUser}
-        />
-        <CommentContent
-          isEditing={isEditing}
-          contentHook={contentHook}
-          replyingTo={replyingTo}
-        />
-        <div className="options">
-          <Scoring
-            scoreInfo={{ score, scoreStatus }}
-            updateScore={(score, scoreStatus) =>
-              updateComment({ score, scoreStatus })
-            }
+        <div className="side-scoring">{scoring}</div>
+        <div className="side-comment">
+          <Header
+            username={user.username}
+            imgName={imgName}
+            createdAt={createdAt}
+            localDate={localDate}
+            isUser={isUser}
+          >
+            {actions}
+          </Header>
+          <CommentContent
+            isEditing={isEditing}
+            contentHook={contentHook}
+            replyingTo={replyingTo}
           />
-          {isUser ? (
-            <UserActions
-              turnEdition={() => {
-                updateIsEditing(true);
-              }}
-              openDeleteModal={() => updateShowDeleteModal(true)}
-              isEditing={isEditing}
-            />
-          ) : (
-            <ReplyAction onReply={() => updateShowAddComment(true)} />
-          )}
-        </div>
-        {isEditing ? (
-          <div className="action__update">
-            <button
-              className="other-button"
-              onClick={() => {
-                updateComment({ content: replaceReply(content) });
-                updateIsEditing(false);
-              }}
-            >
-              UPDATE
-            </button>
+          <div className="options">
+            {scoring}
+            {actions}
           </div>
-        ) : null}
+          {isEditing ? (
+            <div className="action__update">
+              <button
+                className="other-button"
+                onClick={() => {
+                  updateComment({ content: replaceReply(content) });
+                  updateIsEditing(false);
+                }}
+              >
+                UPDATE
+              </button>
+            </div>
+          ) : null}
+        </div>
       </article>
       {showAddComment && (
         <AdditionalComment

@@ -8,6 +8,8 @@
   --light-gray: hsl(223, 19%, 93%);
   --very-lightgray: hsl(228, 33%, 97%);
   --white: hsl(0, 0%, 100%);
+  --comment-width: 20rem;
+  --replies-margin: 1rem;
 }
 
 body {
@@ -42,16 +44,11 @@ button:hover {
   border-radius: 0.5rem;
   margin: 1rem;
   padding: 1rem;
-  width: 20rem;
-}
-
-.replying {
-  color: var(--moderate-blue);
-  font-weight: 500;
+  width: var(--comment-width);
 }
 
 .replies {
-  margin-left: 1rem;
+  margin-left: var(--replies-margin);
   position: relative;
 }
 
@@ -66,11 +63,6 @@ button:hover {
 
 .replies > .comment {
   width: 19rem;
-}
-
-.options {
-  display: flex;
-  justify-content: space-between;
 }
 
 .other-button {
@@ -92,4 +84,56 @@ button:hover {
 }
 .attribution a { 
   color: hsl(228, 45%, 44%); 
+}
+
+.header__action {
+  display: none;
+}
+
+.side-scoring {
+  display: none;
+}
+
+@media screen and (min-width: 700px) {
+  :root {
+    --comment-width: 42rem;
+    --replies-margin: 5rem;
+  }
+
+  .header__action {
+    display: flex;
+  }
+
+  .replies > .comment {
+    width: 37rem;
+  }
+
+  .replies::before {
+    left: -1.5rem;
+  }
+
+  .side-comment > .options {
+    display: none;
+  }
+
+  .comment {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .side-scoring {
+    display: block;
+    align-self: flex-start;
+  }
+
+  .side-scoring > .scoring {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 5.5rem;
+    width: 2rem;
+    margin-inline: 0.5rem;
+  }
+
 }
