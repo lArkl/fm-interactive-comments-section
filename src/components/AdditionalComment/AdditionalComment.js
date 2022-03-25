@@ -7,24 +7,22 @@ function AdditionalComment({ replyTo, user, onAddComment }) {
   const imgName = user.image.png.match(/[-a-z]+(?=.png$)/);
   return (
     <div className="additional">
+      <img src={images[imgName]} alt={user.username} />
       <textarea
         onChange={(e) => setContent(e.target.value)}
         placeholder="Add comment..."
         value={content}
       ></textarea>
-      <div className="additional__bar">
-        <img src={images[imgName]} alt={user.username} />
-        <button
-          className="other-button"
-          disabled={!content}
-          onClick={() => {
-            onAddComment(content);
-            setContent("");
-          }}
-        >
-          {replyTo ? "REPLY" : "SEND"}
-        </button>
-      </div>
+      <button
+        className="other-button"
+        disabled={!content}
+        onClick={() => {
+          onAddComment(content);
+          setContent("");
+        }}
+      >
+        {replyTo ? "REPLY" : "SEND"}
+      </button>
     </div>
   );
 }

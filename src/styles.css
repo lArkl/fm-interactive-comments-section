@@ -69,6 +69,7 @@ button:hover {
   background: var(--moderate-blue);
   border-radius: 0.4rem;
   color: var(--white);
+  font-weight: 500;
   padding: 0.6rem 0.8rem;
 }
 
@@ -88,6 +89,10 @@ button:hover {
 
 .header__action {
   display: none;
+}
+
+.side-comment {
+  width: 100%;
 }
 
 .side-scoring {
@@ -136,4 +141,17 @@ button:hover {
     margin-inline: 0.5rem;
   }
 
+  section > .additional {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .additional > textarea {
+    width: 100%;
+  }
+
+  .additional > button.other-button {
+    width: 5.8rem;
+  }
 }
