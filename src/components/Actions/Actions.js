@@ -4,7 +4,14 @@ import EditIcon from "../../../images/icon-edit.svg";
 import DeleteIcon from "../../../images/icon-delete.svg";
 import "./styles.css";
 
-function Actions({ username, isUser, turnEdition, isEditing, openDeleteModal, onReply }) {
+function Actions({
+  username,
+  isUser,
+  turnEdition,
+  isEditing,
+  openDeleteModal,
+  onReply,
+}) {
   return isUser ? (
     <div className="actions">
       <button

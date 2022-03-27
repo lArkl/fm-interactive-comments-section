@@ -28,6 +28,10 @@ main {
   padding-top: 1.5rem;
 }
 
+section {
+  padding: 1rem;
+}
+
 button {
   background-color: inherit;
   border: inherit;
@@ -39,12 +43,24 @@ button:hover {
   cursor: pointer;
 }
 
+.sr-only {
+  clip-path: inset(50%);
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
 .comment {
   background: var(--white);
   border-radius: 0.5rem;
   margin: 1rem;
   padding: 1rem;
   width: var(--comment-width);
+  line-height: 1.5;
 }
 
 .replies {
@@ -71,6 +87,7 @@ button:hover {
   color: var(--white);
   font-weight: 500;
   padding: 0.6rem 0.8rem;
+  width: 5rem;
 }
 
 .other-button:disabled {
@@ -99,9 +116,9 @@ button:hover {
   display: none;
 }
 
-@media screen and (min-width: 700px) {
+@media screen and (min-width: 800px) {
   :root {
-    --comment-width: 42rem;
+    --comment-width: 43rem;
     --replies-margin: 5rem;
   }
 
@@ -110,7 +127,7 @@ button:hover {
   }
 
   .replies > .comment {
-    width: 37rem;
+    width: 38rem;
   }
 
   .replies::before {
@@ -141,10 +158,20 @@ button:hover {
     margin-inline: 0.5rem;
   }
 
-  section > .additional {
+  section .additional {
     display: flex;
-    justify-content: space-between;
     gap: 1rem;
+    justify-content: space-between;
+  }
+
+  .action__update {
+    margin: 0;
+  }
+
+  .other-button {
+    font-size: 1rem;
+    padding: 1rem;
+    width: 7rem;
   }
 
   .additional > textarea {
@@ -152,6 +179,8 @@ button:hover {
   }
 
   .additional > button.other-button {
-    width: 5.8rem;
+    height: 3rem;
+    padding: 1rem;
+    width: 9rem;
   }
 }
