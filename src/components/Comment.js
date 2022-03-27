@@ -26,6 +26,7 @@ function Comment({
 
   const actions = (
     <Actions
+      username={currentUser.username}
       isUser={isUser}
       turnEdition={() => {
         updateIsEditing(true);

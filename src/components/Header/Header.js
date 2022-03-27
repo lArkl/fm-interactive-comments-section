@@ -8,7 +8,7 @@ function Header({ username, imgName, createdAt, localDate, isUser, children }) {
     <div className="header">
       <div className="header__data">
         <div className="header__image">
-          <img src={images[imgName]} alt="user" />
+          <img src={images[imgName]} alt={`user-${username}`} />
         </div>
         <div className="header__user">{username}</div>
         {isUser && <div className="header__you">you</div>}
