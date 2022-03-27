@@ -1,12 +1,14 @@
 import React from "react";
 import "./styles.css";
 
-function Scoring({ scoreInfo, updateScore }) {
+function Scoring({ scoreInfo, updateScore, isUser }) {
   const { score, scoreStatus } = scoreInfo;
+  console.log("scoring", isUser)
   return (
     <div className="scoring">
       <button
-        aria-pressed={scoreStatus === SCORE_STATUS.PLUS}
+        disabled={isUser}
+        className={`scoring__button ${scoreStatus === SCORE_STATUS.PLUS && "scoring__button--pressed"}`}
         onClick={() => {
           const [delta, newStatus] = getPlusScore(scoreStatus);
           updateScore(score + delta, newStatus);
@@ -14,8 +16,8 @@ function Scoring({ scoreInfo, updateScore }) {
       ></button>
       <div>{score}</div>
       <button
-        aria-pressed={scoreStatus === SCORE_STATUS.MINUS}
-        disabled={score < 1 && scoreStatus !== SCORE_STATUS.MINUS}
+        className={`scoring__button ${scoreStatus === SCORE_STATUS.MINUS && "scoring__button--pressed"}`}
+        disabled={isUser || (score < 1 && scoreStatus !== SCORE_STATUS.MINUS)}
         onClick={() => {
           const [delta, newStatus] = getMinusScore(scoreStatus);
           updateScore(score + delta, newStatus);

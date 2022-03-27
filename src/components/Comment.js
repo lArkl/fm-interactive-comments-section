@@ -39,6 +39,7 @@ function Comment({
 
   const scoring = (
     <Scoring
+      isUser={isUser}
       scoreInfo={{ score, scoreStatus }}
       updateScore={(score, scoreStatus) =>
         updateComment({ score, scoreStatus })
