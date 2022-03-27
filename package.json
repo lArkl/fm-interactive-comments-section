@@ -8,8 +8,8 @@
     "format": "prettier \"./src/**/*.{js,html}\" --write",
     "start": "parcel index.html --open",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "parcel build index.html",
-    "pre-build": "rm -rf dist && npm run build",
+    "build": "parcel build index.html --public-url .",
+    "predeploy": "rm -rf dist && npm run build",
     "deploy": "gh-pages -d dist"
   },
   "keywords": [],

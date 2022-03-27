@@ -32,12 +32,12 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
+![](./screenshot.JPG)
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [https://www.frontendmentor.io/solutions/mobile-first-with-react-HJeWTmpfc](https://www.frontendmentor.io/solutions/mobile-first-with-react-HJeWTmpfc)
+- Live Site URL: [https://larkl.github.io/fm-interactive-comments-section/](https://larkl.github.io/fm-interactive-comments-section/)
 
 ## My process
 
@@ -75,6 +75,17 @@ This challenge let me learn some CSS techniques and practice responsiveness conc
   }
 }
 ```
+
+Learned to format date difference as text with RelativeTimeFormat:
+
+```js
+const rtf1 = new Intl.RelativeTimeFormat("en", { style: "narrow" });
+
+...
+
+rtf1.format(difference, "day");
+```
+
 
 ### Continued development
 
