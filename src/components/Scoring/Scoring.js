@@ -6,7 +6,7 @@ function Scoring({ scoreInfo, updateScore }) {
   return (
     <div className="scoring">
       <button
-        status={getButtonStatus(scoreStatus === SCORE_STATUS.PLUS)}
+        aria-pressed={scoreStatus === SCORE_STATUS.PLUS}
         onClick={() => {
           const [delta, newStatus] = getPlusScore(scoreStatus);
           updateScore(score + delta, newStatus);
@@ -14,7 +14,7 @@ function Scoring({ scoreInfo, updateScore }) {
       ></button>
       <div>{score}</div>
       <button
-        status={getButtonStatus(scoreStatus === SCORE_STATUS.MINUS)}
+        aria-pressed={scoreStatus === SCORE_STATUS.MINUS}
         disabled={score < 1 && scoreStatus !== SCORE_STATUS.MINUS}
         onClick={() => {
           const [delta, newStatus] = getMinusScore(scoreStatus);
@@ -51,8 +51,4 @@ function getMinusScore(scoreStatus) {
     return [-2, SCORE_STATUS.MINUS];
   }
   return [-1, SCORE_STATUS.MINUS];
-}
-
-function getButtonStatus(isPressed) {
-  return isPressed? "pressed" : "unpressed"
 }
