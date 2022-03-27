@@ -17,12 +17,12 @@
   height: 1.1rem;
 }
 
-.scoring > button[ispressed="true"] {
-  filter: brightness(0.5) hue-rotate(25deg);
+.scoring > button[status="pressed"] {
+  filter: brightness(0.7) hue-rotate(25deg);
 }
 
 .scoring > button:hover {
-  filter: brightness(0.7) hue-rotate(25deg);
+  filter: brightness(0.5) hue-rotate(25deg);
 }
 
 .scoring > button:first-child {
