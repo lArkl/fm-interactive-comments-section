@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 const DATA_KEY = "data";
 const ID_KEY = "maxId";
-const USE_LOCAL_STORAGE = false;
+const USE_LOCAL_STORAGE = true;
 
 function calcMaxId(data) {
   const ids = data.comments
