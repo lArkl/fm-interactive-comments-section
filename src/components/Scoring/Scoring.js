@@ -8,7 +8,7 @@ function Scoring({ scoreInfo, updateScore, isUser }) {
       <button
         disabled={isUser}
         className={`scoring__button ${
-          scoreStatus === SCORE_STATUS.PLUS && "scoring__button--pressed"
+          scoreStatus === SCORE_STATUS.PLUS ? "scoring__button--pressed" : ""
         }`}
         onClick={() => {
           const [delta, newStatus] = getPlusScore(scoreStatus);
@@ -18,7 +18,7 @@ function Scoring({ scoreInfo, updateScore, isUser }) {
       <div>{score}</div>
       <button
         className={`scoring__button ${
-          scoreStatus === SCORE_STATUS.MINUS && "scoring__button--pressed"
+          scoreStatus === SCORE_STATUS.MINUS ? "scoring__button--pressed" : ""
         }`}
         disabled={isUser || (score < 1 && scoreStatus !== SCORE_STATUS.MINUS)}
         onClick={() => {
