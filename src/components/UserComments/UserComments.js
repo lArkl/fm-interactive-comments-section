@@ -9,6 +9,7 @@ function UserComments() {
 
   return (
     <section>
+      <h1 className="sr-only">{currentUser?.username} comments and replies</h1>
       {comments.map((comment) => (
         <div key={comment.id}>
           <Comment

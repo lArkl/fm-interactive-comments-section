@@ -10,7 +10,7 @@ function Header({ username, imgName, createdAt, localDate, isUser, children }) {
         <div className="header__image">
           <img src={images[imgName]} alt={`user-${username}`} />
         </div>
-        <h3 className="header__user">{username}</h3>
+        <h2 className="header__user">{username}</h2>
         {isUser && <div className="header__you">you</div>}
         <div className="header__date">{date}</div>
       </div>
