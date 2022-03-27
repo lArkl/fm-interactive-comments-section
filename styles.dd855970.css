@@ -1,0 +1,159 @@
+:root {
+  --moderate-blue: hsl(238, 40%, 52%);
+  --soft-red: hsl(358, 79%, 66%);
+  --light-grayblue: hsl(239, 57%, 85%);
+  --pale-red: hsl(357, 100%, 86%);
+  --dark-blue: hsl(212, 24%, 26%);
+  --grayish-blue: hsl(211, 10%, 45%);
+  --light-gray: hsl(223, 19%, 93%);
+  --very-lightgray: hsl(228, 33%, 97%);
+  --white: hsl(0, 0%, 100%);
+  --comment-width: 20rem;
+  --replies-margin: 1rem;
+}
+
+body {
+  background: var(--very-lightgray);
+  display: grid;
+  font-family: 'Rubik', sans-serif;
+  grid-template-rows: 1fr 3rem;
+  height: 98vh;
+}
+
+main {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding-top: 1.5rem;
+}
+
+button {
+  background-color: inherit;
+  border: inherit;
+  font-family: inherit;
+  font-weight: 700;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.comment {
+  background: var(--white);
+  border-radius: 0.5rem;
+  margin: 1rem;
+  padding: 1rem;
+  width: var(--comment-width);
+}
+
+.replies {
+  margin-left: var(--replies-margin);
+  position: relative;
+}
+
+.replies::before {
+  border: 1px solid var(--light-gray);
+  content: "";
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+}
+
+.replies > .comment {
+  width: 19rem;
+}
+
+.other-button {
+  background: var(--moderate-blue);
+  border-radius: 0.4rem;
+  color: var(--white);
+  font-weight: 500;
+  padding: 0.6rem 0.8rem;
+}
+
+.other-button:disabled {
+  cursor: initial;
+  background-color: var(--light-grayblue);
+}
+
+.attribution { 
+  font-size: 11px; 
+  text-align: center; 
+  height: 3rem;
+}
+.attribution a { 
+  color: hsl(228, 45%, 44%); 
+}
+
+.header__action {
+  display: none;
+}
+
+.side-comment {
+  width: 100%;
+}
+
+.side-scoring {
+  display: none;
+}
+
+@media screen and (min-width: 700px) {
+  :root {
+    --comment-width: 42rem;
+    --replies-margin: 5rem;
+  }
+
+  .header__action {
+    display: flex;
+  }
+
+  .replies > .comment {
+    width: 37rem;
+  }
+
+  .replies::before {
+    left: -1.5rem;
+  }
+
+  .side-comment > .options {
+    display: none;
+  }
+
+  .comment {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .side-scoring {
+    display: block;
+    align-self: flex-start;
+  }
+
+  .side-scoring > .scoring {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 5.5rem;
+    width: 2rem;
+    margin-inline: 0.5rem;
+  }
+
+  section > .additional {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .additional > textarea {
+    width: 100%;
+  }
+
+  .additional > button.other-button {
+    width: 5.8rem;
+  }
+}
+
+/*# sourceMappingURL=/styles.dd855970.css.map */
